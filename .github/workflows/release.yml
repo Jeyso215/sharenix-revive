@@ -1,7 +1,12 @@
 name: Release ShareNix
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        description: The version name for the release
+        type: string
 
 jobs:
   sharenix_release:
@@ -19,7 +24,12 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build image
-        run: ./package
+        run: ./package ${{ inputs.version }}
 
       - name: List files
         run: ls -hal
+
+      - uses: ncipollo/release-action@v1
+        with:
+          name: ${{ inputs.version }}
+          artifacts: "sharenix-x86_64.tar.xz"

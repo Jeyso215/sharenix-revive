@@ -5,7 +5,8 @@ dir=$(readlink -f $dir)
 prevdir=$(pwd)
 cd $dir
 
-image=sharenix:golang-1.11.1
+ver=$1
+image="sharenix:${ver}"
 pkgpath=/usr/local/go/src/github.com/Francesco149/sharenix
 
 dockerbuild() {
