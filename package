@@ -23,6 +23,7 @@ dockerbuild() {
 }
 
 dockerbuild golang x86_64 $image || exit $?
-dockerbuild i386/golang i386 ${image}i386 || exit $?
+# Don't need i386 for my own purposes :)
+# dockerbuild i386/golang i386 ${image}i386 || exit $?
 
 cd $prevdir
