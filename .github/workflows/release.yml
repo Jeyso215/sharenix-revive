@@ -32,4 +32,5 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           name: ${{ inputs.version }}
+          commit: master
           artifacts: "sharenix-x86_64.tar.xz"
