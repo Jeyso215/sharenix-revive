@@ -28,7 +28,7 @@ mv "$sharenixtmp" "$sharenixtmp.png"
 sharenixtmp="$sharenixtmp.png"
 
 if command -v spectacle > /dev/null 2>&1; then
-  spectacle --activewindow --background --pointer --output $sharenixtmp || exit $?
+  spectacle --nonotify --activewindow --background --pointer --output $sharenixtmp || exit $?
 elif command -v gnome-screenshot > /dev/null 2>&1; then
     gnome-screenshot -w -f $sharenixtmp || exit $?
 elif command -v maim > /dev/null 2>&1; then

@@ -29,7 +29,7 @@ mv "$sharenixtmp" "$sharenixtmp.png"
 sharenixtmp="$sharenixtmp.png"
 
 if command -v spectacle > /dev/null 2>&1; then
-  spectacle --region --background --pointer --output $sharenixtmp || exit $?
+  spectacle --nonotify --region --background --pointer --output $sharenixtmp || exit $?
 elif command -v flameshot > /dev/null 2>&1; then
     flameshot gui --raw > $sharenixtmp || exit $?
 elif command -v gnome-screenshot > /dev/null 2>&1; then
