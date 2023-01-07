@@ -33,5 +33,5 @@ jobs:
         with:
           name: ${{ inputs.version }}
           commit: master
-          tag: master
+          tag: v${{ inputs.version }}
           artifacts: "sharenix-x86_64.tar.xz"
