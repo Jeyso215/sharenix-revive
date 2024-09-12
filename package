@@ -7,7 +7,7 @@ cd $dir
 
 ver=$1
 image="sharenix:${ver}"
-pkgpath=/usr/local/go/src/github.com/Francesco149/sharenix
+pkgpath=/usr/local/go/src/github.com/duncte123/sharenix
 
 dockerbuild() {
   docker build \
