@@ -25,8 +25,8 @@ fi
 # extensions at the end of the template so we rename the file
 
 sharenixtmp=$(mktemp /tmp/nicememe.XXXXXXXXXXXXXXXXXXX)
-mv "$sharenixtmp" "$sharenixtmp.png"
-sharenixtmp="$sharenixtmp.png"
+mv "$sharenixtmp" "$sharenixtmp.jpg"
+sharenixtmp="$sharenixtmp.jpg"
 
 if command -v spectacle > /dev/null 2>&1; then
   spectacle --nonotify --region --background --pointer --output $sharenixtmp || exit $?
