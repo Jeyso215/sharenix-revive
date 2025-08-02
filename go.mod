@@ -1,6 +1,6 @@
-module github.com/duncte123/sharenix
+module github.com/Jeyso215/sharenix-revive
 
-go 1.23.1
+go 1.24.0
 
 require (
 	github.com/BurntSushi/xgb v0.0.0-20210121224620-deaf085860bc
@@ -8,7 +8,7 @@ require (
 	github.com/Francesco149/jsonpath v0.0.0-20180425123737-25fe8fdf6384
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0
 	github.com/mattn/go-gtk v0.0.0-20191030024613-af2e013261f5
-	mvdan.cc/xurls/v2 v2.2.0
+	github.com/mvdan/xurls v2.6.0
 )
 
 require (
