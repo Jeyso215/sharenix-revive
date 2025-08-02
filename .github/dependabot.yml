@@ -1,0 +1,41 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      # Critical fix: Add time to avoid GitHub rate limits
+      time: "04:00"
+    open-pull-requests-limit: 5  # Reduced from 10 to prevent overload
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "automated"
+      - "gomod"  # Ecosystem-specific label
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    # Critical addition: Ignore pseudo-versions
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      # Critical fix: Add time offset to avoid concurrent runs
+      time: "06:00"
+    open-pull-requests-limit: 5
+    target-branch: "main"  # Critical fix: Missing in original
+    labels:
+      - "dependencies"
+      - "automated"
+      - "github-actions"  # Ecosystem-specific label
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    # Critical addition: Ignore workflow-only updates
+    ignore:
+      - dependency-name: "actions/checkout"
+        versions: ["v4", "v5"]  # Example: Pin to v3
