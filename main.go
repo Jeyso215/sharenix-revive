@@ -21,7 +21,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"github.com/duncte123/sharenix/sharenixlib"
+	"github.com/Jeyso215/sharenix-revive"
 )
 
 func handleCLI() (err error) {
