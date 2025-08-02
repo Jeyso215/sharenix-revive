@@ -18,9 +18,10 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
-    # Security hardening: Prevent indirect dependency updates
     allow:
       - dependency-type: "direct"
+    # Critical fix for ARG-based Docker builds
+    rebase-strategy: "disabled"  # Prevents PR conflicts with Docker updates
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -39,36 +40,44 @@ updates:
     ignore:
       - dependency-name: "actions/checkout"
         versions: ["v4", "v5"]
-      # Critical addition: Block unstable pre-releases
       - dependency-name: "*"
         update-types: ["version-update:semver-prerelease"]
 
   - package-ecosystem: "docker"
-    directory: "/"  # Critical: Must match Dockerfile location
+    directory: "/"  # Must match Dockerfile location
     schedule:
       interval: "daily"
-      time: "08:00"  # Staggered to avoid concurrent runs
-    open-pull-requests-limit: 3  # Reduced (Docker updates are higher-risk)
+      time: "08:00"
+    open-pull-requests-limit: 3
     target-branch: "main"
     labels:
       - "dependencies"
       - "automated"
       - "docker"
+      - "stretch"  # Critical: Track legacy Debian base
     commit-message:
       prefix: "container"
       include: "scope"
-    # Critical Docker-specific rules:
     ignore:
-      # Block unstable tags
-      - dependency-name: "library/alpine"
-        versions: ["edge", "latest"]
-      - dependency-name: "library/debian"
-        versions: ["unstable", "sid"]
-      # Prevent digest-only updates (no version change)
-      - dependency-name: "*"
+      # Block incompatible Debian bases (critical for your stretch dependency)
+      - dependency-name: "golang"
+        versions: [
+          "*-buster", 
+          "*-bullseye", 
+          "*-bookworm",
+          "*-trixie",
+          "latest"
+        ]
+      # Prevent digest churn for stable tags
+      - dependency-name: "golang"
         update-types: ["version-update:digest"]
-    # Security hardening:
+      # Block unsupported stretch updates (EOL since 2020)
+      - dependency-name: "library/debian"
+        versions: ["stretch", "9"]  # Already pinned in your Dockerfile
     allow:
-      - dependency-type: "direct"
-    # Critical: Enable version pinning enforcement
+      - dependency-name: "golang"  # Only allow golang updates
+        versions: ["*-stretch"]    # Enforce stretch compatibility
     versioning-strategy: "lockfile-only"
+    # Critical: Handle ARG-based base images
+    registries:
+      - "dockerhub"  # Required for ARG resolution
