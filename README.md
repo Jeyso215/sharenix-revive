@@ -1,5 +1,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Installing - Arch Linux](#installing---arch-linux)
@@ -16,6 +17,7 @@
 - [Using a Plugin](#using-a-plugin)
 - [Writing a Plugin](#writing-a-plugin)
 - [Documentation](#documentation)
+- [A Documentation video about how to set it up **IGNORE the Pays.host**](https://www.youtube.com/watch?v=E6wUWnQt87I)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
