@@ -39,3 +39,33 @@ updates:
     ignore:
       - dependency-name: "actions/checkout"
         versions: ["v4", "v5"]  # Example: Pin to v3
+
+        - package-ecosystem: "docker"
+    directory: "/"  # Critical: Must match Dockerfile location
+    schedule:
+      interval: "daily"
+      time: "08:00"  # Staggered to avoid concurrent runs
+    open-pull-requests-limit: 3  # Reduced (Docker updates are higher-risk)
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "automated"
+      - "docker"
+    commit-message:
+      prefix: "container"
+      include: "scope"
+    # Critical Docker-specific rules:
+    ignore:
+      # Block unstable tags
+      - dependency-name: "library/alpine"
+        versions: ["edge", "latest"]
+      - dependency-name: "library/debian"
+        versions: ["unstable", "sid"]
+      # Prevent digest-only updates (no version change)
+      - dependency-name: "*"
+        update-types: ["version-update:digest"]
+    # Security hardening:
+    allow:
+      - dependency-type: "direct"
+    # Critical: Enable version pinning enforcement
+    versioning-strategy: "lockfile-only"
