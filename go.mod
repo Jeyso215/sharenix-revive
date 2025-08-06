@@ -15,5 +15,5 @@ require (
 	github.com/mattn/go-pointer v0.0.1 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
 	golang.org/x/net v0.38.0 // indirect
-	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/text v0.27.0 // indirect
 )
